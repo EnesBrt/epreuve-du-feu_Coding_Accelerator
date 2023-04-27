@@ -80,3 +80,4 @@ try:
     string_calculator(argument)
 except IndexError:
     print("error")
+    sys.exit()

@@ -24,7 +24,10 @@ try:
     training(argument_one, argument_two)
 except IndexError:
     print("error !")
+    sys.exit()
 except ValueError:
     print("error !")
+    sys.exit()
 except TypeError:
     print("error !")
+    sys.exit()

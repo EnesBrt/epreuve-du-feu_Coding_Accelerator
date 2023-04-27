@@ -42,7 +42,10 @@ try:
     find_matches(board, to_find)
 except IndexError:
     print("error")
+    sys.exit()
 except ValueError:
     print("error")
+    sys.exit()
 except FileNotFoundError:
     print("error")
+    sys.exit()

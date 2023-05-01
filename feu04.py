@@ -62,15 +62,25 @@ def display_result(plateau, top_left_position, square_size):
     for row in plateau:
         print("".join(row))
 
+try:
+    if len(sys.argv) != 2:
+        print("params needed: plateau_filename")
+        sys.exit()
 
-if len(sys.argv) != 2:
-    print("params needed: plateau_filename")
+    plateau_filename = sys.argv[1]
+    plateau = read_plateau(plateau_filename)
+
+    top_left_position_row, top_left_position_col, max_square_size = greater_square_calculator(plateau)
+    top_left_position = (top_left_position_row, top_left_position_col)
+
+    display_result(plateau, top_left_position, max_square_size)
+except IndexError:
+    print("error")
+    sys.exit()
+except ValueError:
+    print("error")
+    sys.exit()
+except FileNotFoundError:
+    print("error")
     sys.exit()
 
-plateau_filename = sys.argv[1]
-plateau = read_plateau(plateau_filename)
-
-top_left_position_row, top_left_position_col, max_square_size = greater_square_calculator(plateau)
-top_left_position = (top_left_position_row, top_left_position_col)
-
-display_result(plateau, top_left_position, max_square_size)

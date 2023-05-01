@@ -1,4 +1,4 @@
-![Epreuve du feu - Coding Accelerator](https://cdn-icons-png.flaticon.com/512/426/426833.png?w=1380&t=st=1682949454~exp=1682950054~hmac=2885e1f2736c8cd6f7a52e92c976d32d18720145e3e64f058103b76a1db90922)
+![Epreuve du feu - Coding Accelerator](https://cdn-icons-png.flaticon.com/512/1172/1172477.png?w=1380&t=st=1682971342~exp=1682971942~hmac=bed20bf6ccdce95f537a170ff65f457d537ff729a63d95db7f8919ac744ae584)
 
 # Epreuve du feu - Coding Accelerator
 

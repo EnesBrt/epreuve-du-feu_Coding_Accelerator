@@ -1,3 +1,5 @@
+# Génerer un plateau
+
 import random
 import sys
 

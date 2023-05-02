@@ -1,3 +1,5 @@
+# Génerer un labyrinthe
+
 import sys
 import random
 

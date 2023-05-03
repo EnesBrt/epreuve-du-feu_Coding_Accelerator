@@ -141,9 +141,9 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
 # trace le chemin le plus court trouvé
 def trace_path_in_labyrinthe(labyrinthe, path):
     labyrinthe_copy = copy.deepcopy(labyrinthe)
-    for i in range(1, len(path) - 1):  # Commencez à 1 pour éviter l'entrée, et arrêtez-vous avant la sortie
-        row, col = path[i]  # Récupérez les coordonnées de la case du chemin
-        labyrinthe_copy[row][col] = 'o'  # Modifiez la case correspondante dans la copie du labyrinthe avec 'o'
+    for i in range(1, len(path) - 1):
+        row, col = path[i]
+        labyrinthe_copy[row][col] = 'o'
 
     return labyrinthe_copy
 

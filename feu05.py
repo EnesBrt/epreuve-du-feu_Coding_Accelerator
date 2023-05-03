@@ -130,7 +130,6 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
                 parents[neighbor] = current_node
                 f_costs[neighbor] = g_costs[neighbor] + heuristic_func(neighbor, goal_node)
 
-
     # Si l'ensemble des noeuds ouverts est vide,
     # cela signifie que nous avons exploré toutes les options possibles sans atteindre la sortie,
     # alors on retourne un chemin vide (aucun chemin trouvé).
@@ -144,7 +143,6 @@ def trace_path_in_labyrinthe(labyrinthe, path):
     for i in range(1, len(path) - 1):
         row, col = path[i]
         labyrinthe_copy[row][col] = 'o'
-
     return labyrinthe_copy
 
 
@@ -155,7 +153,6 @@ def number_attempts(labyrinthe_with_path):
         for col in range(len(labyrinthe_with_path[0])):
             if labyrinthe_with_path[row][col] == 'o':
                 count_o += 1
-
     print(f'SORTIE ATTEINTE EN {count_o} COUPS !')
 
 

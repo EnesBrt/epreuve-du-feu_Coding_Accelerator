@@ -160,7 +160,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         filename = sys.argv[1]
     else:
-        print("Usage: python script.py <labyrinthe_filename>")
+        print("error")
         sys.exit()
 
     labyrinthe = read_file(filename)

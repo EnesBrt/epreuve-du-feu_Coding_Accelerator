@@ -132,7 +132,7 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
                 f_costs[neighbor] = g_costs[neighbor] + heuristic_func(neighbor, goal_node)
 
     # Si aucune case à explorer n'est trouvée, retournez un chemin vide, car il n'y a pas de solution pour atteindre
-    # la sortie.
+    # la sortie
     if not open_set:
         return []
 

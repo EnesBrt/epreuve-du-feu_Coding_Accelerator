@@ -26,8 +26,9 @@ def find_start_and_exit(labyrinthe):
                 output = (row, col)
     return entry, output
 
-# Fonction pour créer un graphe à partir d'un labyrinthe en associant chaque case vide, l'entrée et la sortie aux
-# noeuds et en connectant les noeuds adjacents qui ne sont pas des murs.
+
+# fonction qui convertit un labyrinthe en un graphe, en connectant les cases vides (y compris l'entrée et la sortie)
+# à leurs voisins adjacents (haut, bas, gauche, droite) qui ne sont pas des murs
 def create_graph_from_labyrinthe(labyrinthe):
     graph = {}
     rows = len(labyrinthe)
@@ -48,7 +49,9 @@ def create_graph_from_labyrinthe(labyrinthe):
     return graph
 
 
-# Calcule la distance de Manhattan entre deux points (current_node et goal_node) en utilisant leurs coordonnées (x, y).
+# Cette fonction calcule la distance entre deux points (nœuds) dans un tableau, en additionnant la
+# différence absolue de leurs coordonnées x et y, cela donne une estimation simple de la distance à parcourir entre
+# les deux points, sans prendre en compte les obstacles
 def manhattan_distance(current_node, goal_node):
     current_node_x = current_node[0]
     current_node_y = current_node[1]
@@ -66,8 +69,6 @@ def manhattan_distance(current_node, goal_node):
 
 # Fonction de l'algorithme A Star, c'est une fonction heuristique qui permet de trouver le chemin le plus court
 def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
-    # # Initialise les ensembles open_set et closed_set, les coûts g et f, et les parents pour tous les nœuds du
-    # graphe, en définissant les coûts de départ et les parents du nœud de départ.
     open_set = {start_node}
     closed_set = set()
 
@@ -79,8 +80,8 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
 
     parents = {node: None for node in graph}
 
-    # Fonction pour trouver le nœud ayant le coût F le plus bas (coût total estimé) parmi les nœuds dans l'ensemble
-    # ouvert (nœuds à explorer)
+    # Cette fonction cherche le nœud ayant le coût le plus bas parmi les nœuds ouverts et le renvoie pour décider de
+    # la prochaine étape à suivre dans la recherche du chemin
     def find_lowest_f_cost_node(open_set):
         lowest_f_cost = float('inf')
         lowest_f_cost_node = None
@@ -90,8 +91,8 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
                 lowest_f_cost_node = node
         return lowest_f_cost_node
 
-    # # fonction qui retrace le chemin le plus court trouvé par l'algorithme de recherche, en partant du nœud
-    # d'arrivée et en remontant jusqu'au nœud de départ à l'aide du dictionnaire "parents".
+    # Cette fonction retrace le chemin le plus court entre deux points dans un labyrinthe en suivant les liens entre
+    # les cases depuis la sortie jusqu'à l'entrée
     def reconstruct_path(parents, goal_node):
         path = []
         current_node = goal_node
@@ -99,11 +100,11 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
         while current_node is not None:
             path.insert(0, current_node)
             current_node = parents[current_node]
-
         return path
 
-    # Tant qu'il reste des nœuds à explorer, sélectionne le nœud avec le coût total le plus faible, vérifie si
-    # c'est le nœud d'arrivée, construit le chemin si c'est le cas, sinon, continue à explorer les voisins.
+    # Tant qu'il reste des nœuds à explorer, on choisit le nœud ayant le plus petit coût total (distance déjà
+    # parcourue + distance estimée). Si ce nœud est la sortie, on reconstruit le chemin et on le renvoie. Sinon,
+    # on marque ce nœud comme exploré et on continue
     while len(open_set) > 0:
         current_node = find_lowest_f_cost_node(open_set)
         if current_node == goal_node:
@@ -113,10 +114,10 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
         open_set.remove(current_node)
         closed_set.add(current_node)
 
-            # Parcourt les voisins du nœud courant, ignore les voisins déjà explorés (dans closed_set),
-            # met à jour les coûts et les parents des voisins non explorés,
-            # et ajoute les voisins au prochain ensemble de nœuds à explorer (open_set).
-            for neighbor in graph[current_node]:
+        # Cette partie du code examine les voisins du nœud actuel dans le labyrinthe, ignore ceux déjà explorés et
+        # met à jour les coûts pour atteindre les voisins non explorés, en tenant compte de l'heuristique pour
+        # trouver le chemin le plus court
+        for neighbor in graph[current_node]:
             if neighbor in closed_set:
                 continue
 
@@ -130,9 +131,8 @@ def a_star_algorithm(graph, start_node, goal_node, heuristic_func):
                 parents[neighbor] = current_node
                 f_costs[neighbor] = g_costs[neighbor] + heuristic_func(neighbor, goal_node)
 
-    # Si l'ensemble des noeuds ouverts est vide,
-    # cela signifie que nous avons exploré toutes les options possibles sans atteindre la sortie,
-    # alors on retourne un chemin vide (aucun chemin trouvé).
+    # Si aucune case à explorer n'est trouvée, retournez un chemin vide, car il n'y a pas de solution pour atteindre
+    # la sortie.
     if not open_set:
         return []
 

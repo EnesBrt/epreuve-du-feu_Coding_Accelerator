@@ -1,3 +1,5 @@
+# Labyrinthe
+
 import copy
 import sys
 
